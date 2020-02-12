@@ -1,7 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/naoto67/clean-architecture/src/infrastructure"
+)
 
 func main() {
-	fmt.Println("vim-go")
+	userRepository := infrastructure.NewUserRepository()
+	fmt.Println(userRepository.FindByName("sample"))
+	fmt.Println(userRepository.FindByName("aaa"))
 }
