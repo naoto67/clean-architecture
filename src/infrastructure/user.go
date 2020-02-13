@@ -2,20 +2,21 @@ package infrastructure
 
 import (
 	"github.com/naoto67/clean-architecture/src/domain/model"
-	"github.com/naoto67/clean-architecture/src/domain/repository"
 	"github.com/naoto67/clean-architecture/src/infrastructure/mock"
 )
 
-type userRepository struct {
-	mock *mock.Mock
+type UserRepository struct {
+	DB *mock.Mock
 }
 
-func NewUserRepository() repository.UserRepository {
-	return userRepository{
-		mock: mock.NewMock(),
-	}
+func (repository UserRepository) FindByName(name string) (*model.User, error) {
+	return repository.DB.FindByName(name)
 }
 
-func (repository userRepository) FindByName(name string) (*model.User, error) {
-	return repository.mock.FindByName(name)
+func (repository UserRepository) Save(user model.User) error {
+	return repository.DB.Save(user)
+}
+
+func (repository UserRepository) FindAll() ([]model.User, error) {
+	return repository.DB.FindAll()
 }

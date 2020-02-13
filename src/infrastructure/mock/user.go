@@ -20,3 +20,13 @@ func (m *Mock) FindByName(name string) (*model.User, error) {
 	}
 	return nil, fmt.Errorf("Name: %s not found", name)
 }
+
+func (m *Mock) Save(user model.User) error {
+	user.ID = users[len(users)-1].ID + 1
+	users = append(users, user)
+	return nil
+}
+
+func (m *Mock) FindAll() ([]model.User, error) {
+	return users, nil
+}
