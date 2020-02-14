@@ -1,7 +1,7 @@
 package mock
 
-type Mock struct{}
+type MemoryMock struct{}
 
-func New() *Mock {
-	return &Mock{}
+func NewMemoryMock() *MemoryMock {
+	return &MemoryMock{}
 }
