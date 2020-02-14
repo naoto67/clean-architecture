@@ -11,7 +11,7 @@ import (
 func TestFindByName(t *testing.T) {
 	assert := assert.New(t)
 
-	repo := NewUserRepository(mock.New())
+	repo := mock.NewUserRepository()
 	testUserName := "test user"
 
 	repo.Save(model.User{Name: testUserName})
@@ -23,7 +23,7 @@ func TestFindByName(t *testing.T) {
 func TestSave(t *testing.T) {
 	assert := assert.New(t)
 
-	repo := NewUserRepository(mock.New())
+	repo := mock.NewUserRepository()
 	user := model.User{Name: "test user"}
 	err := repo.Save(user)
 	assert.Nil(err)
@@ -32,7 +32,7 @@ func TestSave(t *testing.T) {
 func TestFindAll(t *testing.T) {
 	assert := assert.New(t)
 
-	repo := NewUserRepository(mock.New())
+	repo := mock.NewUserRepository()
 	repo.Save(model.User{Name: "test user"})
 
 	users, err := repo.FindAll()
