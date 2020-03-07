@@ -10,5 +10,5 @@ import (
 
 func setup() error {
 	env := os.Getenv("ENV")
-	return godotenv.Load("./env" + env + ".env")
+	return godotenv.Load("./env/" + env + ".env")
 }
