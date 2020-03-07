@@ -7,6 +7,7 @@ import (
 
 type UserInteractor interface {
 	Add(user model.User) error
+	FindById(id int) (*model.User, error)
 }
 
 type userInteractor struct {
@@ -21,4 +22,8 @@ func NewUserInteractor(repository repository.UserRepository) UserInteractor {
 
 func (interactor *userInteractor) Add(user model.User) error {
 	return interactor.userRepository.Create(user)
+}
+
+func (interactor *userInteractor) FindById(id int) (*model.User, error) {
+	return interactor.userRepository.FindById(id)
 }
