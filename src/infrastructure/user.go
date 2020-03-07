@@ -31,6 +31,6 @@ func (repository userRepository) Update(user model.User) error {
 	return repository.db.UpdateUser(user)
 }
 
-func (repository userRepository) FindAll() ([]model.User, error) {
+func (repository userRepository) FindAll() (model.Users, error) {
 	return repository.db.FindUsers()
 }

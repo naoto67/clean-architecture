@@ -11,6 +11,7 @@ import (
 )
 
 type UserHandler interface {
+	Index(c *gin.Context)
 	Show(c *gin.Context)
 }
 
@@ -22,6 +23,15 @@ func NewUserHandler(reg registry.Registry) UserHandler {
 	return &userHandler{
 		userInteractor: usecase.NewUserInteractor(reg.NewUserRepository()),
 	}
+}
+
+func (handler *userHandler) Index(c *gin.Context) {
+	users, err := handler.userInteractor.FindAll()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, users)
 }
 
 func (handler *userHandler) Show(c *gin.Context) {

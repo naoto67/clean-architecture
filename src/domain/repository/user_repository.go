@@ -7,7 +7,8 @@ import (
 type UserRepository interface {
 	FindByName(name string) (*model.User, error)
 	FindById(id int) (*model.User, error)
-	FindAll() ([]model.User, error)
 	Create(user model.User) error
 	Update(user model.User) error
+
+	FindAll() (model.Users, error)
 }

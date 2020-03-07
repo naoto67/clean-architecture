@@ -8,6 +8,7 @@ import (
 type UserInteractor interface {
 	Add(user model.User) error
 	FindById(id int) (*model.User, error)
+	FindAll() (model.Users, error)
 }
 
 type userInteractor struct {
@@ -26,4 +27,8 @@ func (interactor *userInteractor) Add(user model.User) error {
 
 func (interactor *userInteractor) FindById(id int) (*model.User, error) {
 	return interactor.userRepository.FindById(id)
+}
+
+func (interactor *userInteractor) FindAll() (model.Users, error) {
+	return interactor.userRepository.FindAll()
 }

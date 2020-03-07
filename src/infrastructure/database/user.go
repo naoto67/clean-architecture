@@ -22,8 +22,8 @@ func (db *DB) FindUserById(id int) (*model.User, error) {
 	return &user, nil
 }
 
-func (db *DB) FindUsers() ([]model.User, error) {
-	var users []model.User
+func (db *DB) FindUsers() (model.Users, error) {
+	var users model.Users
 	err := db.conn.Select(&users, "SELECT * FROM users")
 	if err != nil {
 		return nil, err

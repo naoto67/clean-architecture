@@ -14,6 +14,7 @@ func New() *gin.Engine {
 	userHandler := handler.NewUserHandler(reg)
 	userGroup := router.Group("/users")
 	{
+		userGroup.GET("", userHandler.Index)
 		userGroup.GET("/:id", userHandler.Show)
 	}
 
