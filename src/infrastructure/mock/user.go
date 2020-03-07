@@ -7,12 +7,12 @@ import (
 	"github.com/naoto67/clean-architecture/src/domain/repository"
 )
 
-type UserRepository struct {
+type userRepository struct {
 	DB *MemoryMock
 }
 
 func NewUserRepository() repository.UserRepository {
-	return UserRepository{
+	return userRepository{
 		DB: NewMemoryMock(),
 	}
 }
@@ -23,7 +23,7 @@ var users = []model.User{
 	model.User{ID: 3, Name: "sap"},
 }
 
-func (repository UserRepository) FindByName(name string) (*model.User, error) {
+func (repository userRepository) FindByName(name string) (*model.User, error) {
 	for _, u := range users {
 		if u.Name == name {
 			return &u, nil
@@ -32,12 +32,21 @@ func (repository UserRepository) FindByName(name string) (*model.User, error) {
 	return nil, fmt.Errorf("Name: %s not found", name)
 }
 
-func (repository UserRepository) Save(user model.User) error {
+func (repository userRepository) Create(user model.User) error {
 	user.ID = users[len(users)-1].ID + 1
 	users = append(users, user)
 	return nil
 }
 
-func (repository UserRepository) FindAll() ([]model.User, error) {
+func (repository userRepository) Update(user model.User) error {
+	for _, u := range users {
+		if u.ID == user.ID {
+			u.Name = user.Name
+		}
+	}
+	return nil
+}
+
+func (repository userRepository) FindAll() ([]model.User, error) {
 	return users, nil
 }

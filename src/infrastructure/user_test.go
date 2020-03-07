@@ -22,7 +22,7 @@ func TestMain(m *testing.M) {
 	config.Setup()
 	setupUserRepository()
 	// seed
-	userRepo.Save(model.User{Name: "username"})
+	userRepo.Create(model.User{Name: "username"})
 	m.Run()
 	test.TruncateUsersTable()
 }
@@ -44,19 +44,30 @@ func TestFindByName(t *testing.T) {
 	})
 }
 
-func TestSave(t *testing.T) {
+func TestCreate(t *testing.T) {
 	assert := assert.New(t)
 
-	t.Run("succeeded to save user when username is test", func(t *testing.T) {
+	t.Run("succeeded to create user when username is test", func(t *testing.T) {
 		username := "test"
-		err := userRepo.Save(model.User{Name: username})
+		err := userRepo.Create(model.User{Name: username})
 		assert.Nil(err)
 	})
 
-	t.Run("failed to save user when username is username because duplicated name", func(t *testing.T) {
+	t.Run("failed to create user when username is username because duplicated name", func(t *testing.T) {
 		username := "username"
-		err := userRepo.Save(model.User{Name: username})
+		err := userRepo.Create(model.User{Name: username})
 		assert.NotNil(err)
+	})
+}
+
+func TestUpdate(t *testing.T) {
+	assert := assert.New(t)
+
+	t.Run("succeeded to update user", func(t *testing.T) {
+		user, _ := userRepo.FindByName("username")
+		user.Name = "updated"
+		err := userRepo.Update(*user)
+		assert.Nil(err)
 	})
 }
 

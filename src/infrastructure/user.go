@@ -19,8 +19,12 @@ func (repository userRepository) FindByName(name string) (*model.User, error) {
 	return repository.db.FindUserByName(name)
 }
 
-func (repository userRepository) Save(user model.User) error {
-	return repository.db.SaveUser(user)
+func (repository userRepository) Create(user model.User) error {
+	return repository.db.InsertUser(user)
+}
+
+func (repository userRepository) Update(user model.User) error {
+	return repository.db.UpdateUser(user)
 }
 
 func (repository userRepository) FindAll() ([]model.User, error) {

@@ -22,8 +22,14 @@ func (db *DB) FindUsers() ([]model.User, error) {
 	return users, nil
 }
 
-func (db *DB) SaveUser(user model.User) error {
+func (db *DB) InsertUser(user model.User) error {
 	sql := "INSERT INTO users (name) VALUES (?)"
 	_, err := db.conn.Exec(sql, user.Name)
+	return err
+}
+
+func (db *DB) UpdateUser(user model.User) error {
+	sql := "UPDATE users SET name = ? WHERE id = ?"
+	_, err := db.conn.Exec(sql, user.Name, user.ID)
 	return err
 }
