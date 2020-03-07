@@ -19,6 +19,10 @@ func (repository userRepository) FindByName(name string) (*model.User, error) {
 	return repository.db.FindUserByName(name)
 }
 
+func (repository userRepository) FindById(id int) (*model.User, error) {
+	return repository.db.FindUserById(id)
+}
+
 func (repository userRepository) Create(user model.User) error {
 	return repository.db.InsertUser(user)
 }

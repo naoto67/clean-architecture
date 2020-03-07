@@ -44,6 +44,24 @@ func TestFindByName(t *testing.T) {
 	})
 }
 
+func TestFindById(t *testing.T) {
+	assert := assert.New(t)
+
+	t.Run("succeeded to find by id when id is present", func(t *testing.T) {
+		username := "username"
+		user, _ := userRepo.FindByName(username)
+		user, err := userRepo.FindById(user.ID)
+		assert.Nil(err)
+		assert.NotNil(user)
+	})
+
+	t.Run("failed to find by id when id is not present", func(t *testing.T) {
+		user, err := userRepo.FindById(0)
+		assert.NotNil(err)
+		assert.Nil(user)
+	})
+}
+
 func TestCreate(t *testing.T) {
 	assert := assert.New(t)
 
