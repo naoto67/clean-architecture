@@ -14,11 +14,11 @@ type userInteractor struct {
 }
 
 func NewUserInteractor(repository repository.UserRepository) UserInteractor {
-	return userInteractor{
+	return &userInteractor{
 		userRepository: repository,
 	}
 }
 
-func (interactor userInteractor) Add(user model.User) error {
-	return interactor.userRepository.Save(user)
+func (interactor *userInteractor) Add(user model.User) error {
+	return interactor.userRepository.Create(user)
 }
