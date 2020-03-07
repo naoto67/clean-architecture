@@ -6,6 +6,6 @@ development:
 
 test:
     dialect: mysql
-    datasource: root@tcp(localhost:3306)/ca_development?charset=utf8&parseTime=true
+    datasource: root@tcp(localhost:3306)/ca_test?charset=utf8&parseTime=true
     dir: migrations/mysql
     table: migrations
