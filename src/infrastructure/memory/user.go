@@ -23,7 +23,7 @@ func (m Memory) FindById(id int) (*model.User, error) {
 			return &u, nil
 		}
 	}
-	return nil, fmt.Errorf("Name: %s not found", name)
+	return nil, fmt.Errorf("ID: %d not found", id)
 }
 
 func (m Memory) Create(user model.User) error {
