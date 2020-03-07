@@ -1,10 +1,7 @@
 package config
 
 import (
-	"os"
-
 	"github.com/caarlos0/env/v6"
-	"github.com/joho/godotenv"
 )
 
 type config struct {
@@ -18,7 +15,7 @@ type config struct {
 var Config config
 
 func Setup() {
-	err := loadEnv()
+	err := setup()
 	if err != nil {
 		panic(err)
 	}
@@ -26,9 +23,4 @@ func Setup() {
 	if err := env.Parse(&Config); err != nil {
 		panic(err)
 	}
-}
-
-func loadEnv() error {
-	env := os.Getenv("ENV")
-	return godotenv.Load("./env/" + env + ".env")
 }
