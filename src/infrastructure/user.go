@@ -3,25 +3,26 @@ package infrastructure
 import (
 	"github.com/naoto67/clean-architecture/src/domain/model"
 	"github.com/naoto67/clean-architecture/src/domain/repository"
-	"github.com/naoto67/clean-architecture/src/infrastructure/memory"
+	"github.com/naoto67/clean-architecture/src/infrastructure/database"
 )
 
 type userRepository struct {
-	Memory *memory.Memory
+	// Memory *memory.Memory
+	db *database.DB
 }
 
-func NewUserRepository(m *memory.Memory) repository.UserRepository {
-	return userRepository{Memory: m}
+func NewUserRepository(db *database.DB) repository.UserRepository {
+	return userRepository{db: db}
 }
 
 func (repository userRepository) FindByName(name string) (*model.User, error) {
-	return repository.Memory.FindByName(name)
+	return repository.db.FindUserByName(name)
 }
 
 func (repository userRepository) Save(user model.User) error {
-	return repository.Memory.Save(user)
+	return repository.db.SaveUser(user)
 }
 
 func (repository userRepository) FindAll() ([]model.User, error) {
-	return repository.Memory.FindAll()
+	return repository.db.FindUsers()
 }

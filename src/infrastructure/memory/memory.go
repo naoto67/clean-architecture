@@ -2,6 +2,6 @@ package memory
 
 type Memory struct{}
 
-func NewMemory() *Memory {
+func New() *Memory {
 	return &Memory{}
 }
