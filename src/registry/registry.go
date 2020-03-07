@@ -16,10 +16,6 @@ type registry struct {
 	db     *database.DB
 }
 
-func init() {
-	New()
-}
-
 func New() Registry {
 	return &registry{
 		memory: memory.New(),
