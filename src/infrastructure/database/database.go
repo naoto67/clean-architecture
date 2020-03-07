@@ -14,7 +14,7 @@ type DB struct {
 }
 
 func New() *DB {
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true",
 		config.Config.DatabaseUser,
 		config.Config.DatabasePassword,
 		config.Config.DatabaseHost,

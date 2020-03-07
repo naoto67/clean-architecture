@@ -6,7 +6,7 @@ import (
 
 func (db *DB) FindUserByName(name string) (*model.User, error) {
 	var user model.User
-	err := db.conn.Get(&user, "SELECT id, name FROM users WHERE name = ?", name)
+	err := db.conn.Get(&user, "SELECT * FROM users WHERE name = ?", name)
 	if err != nil {
 		return nil, err
 	}
@@ -15,7 +15,7 @@ func (db *DB) FindUserByName(name string) (*model.User, error) {
 
 func (db *DB) FindUserById(id int) (*model.User, error) {
 	var user model.User
-	err := db.conn.Get(&user, "SELECT id, name FROM users WHERE id = ?", id)
+	err := db.conn.Get(&user, "SELECT * FROM users WHERE id = ?", id)
 	if err != nil {
 		return nil, err
 	}
@@ -24,7 +24,7 @@ func (db *DB) FindUserById(id int) (*model.User, error) {
 
 func (db *DB) FindUsers() ([]model.User, error) {
 	var users []model.User
-	err := db.conn.Select(&users, "SELECT id, name FROM users")
+	err := db.conn.Select(&users, "SELECT * FROM users")
 	if err != nil {
 		return nil, err
 	}
