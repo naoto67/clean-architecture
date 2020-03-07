@@ -1,7 +1,7 @@
 SHELL=/bin/zsh
 
 run:
-	 ENV=development go run -tags local main.go
+	 ENV=development go run -tags local ./cmd/server/main.go
 
 .PHONY: test
 test:
