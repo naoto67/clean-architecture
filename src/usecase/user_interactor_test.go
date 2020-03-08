@@ -4,11 +4,8 @@ import (
 	"testing"
 
 	"github.com/naoto67/clean-architecture/src/config"
-	"github.com/naoto67/clean-architecture/src/domain/model"
 	"github.com/naoto67/clean-architecture/src/registry"
 	"github.com/naoto67/clean-architecture/test"
-
-	"github.com/stretchr/testify/assert"
 )
 
 var (
@@ -21,13 +18,6 @@ func TestMain(m *testing.M) {
 	setupUserInteractor()
 	m.Run()
 	test.TruncateUsersTable()
-}
-
-func TestAdd(t *testing.T) {
-	assert := assert.New(t)
-
-	err := userUsecase.Add(model.User{Name: "test"})
-	assert.Nil(err)
 }
 
 func setupUserInteractor() {
