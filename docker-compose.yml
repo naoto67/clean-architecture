@@ -1,0 +1,25 @@
+version: '3'
+services:
+  db:
+    image: mysql:5.7
+    ports:
+      - "33006:3306" # "local:container"
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+      TZ: Asia/Tokyo
+    volumes:
+      - db-data:/var/lib/mysql/data
+  app:
+    build:
+      context: .
+      dockerfile: ./images/devevelopment/Dockerfile
+    command: ["ENV=devevelopment /app/main"]
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+
+volumes:
+  db-data:

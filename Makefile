@@ -1,5 +1,8 @@
 SHELL=/bin/zsh
 
+build:
+	go build --tags local ./cmd/server/main.go
+
 run:
 	 ENV=development go run -tags local ./cmd/server/main.go
 
